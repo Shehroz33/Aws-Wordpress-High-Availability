@@ -1,6 +1,7 @@
-# AWS WordPress High Availability Architecture
+# AWS WordPress High Availability on AWS
 
-This project demonstrates a highly available WordPress deployment on AWS by connecting multiple AWS services to ensure scalability, reliability, and fault tolerance.
+
+This project demonstrates a highly available WordPress deployment on AWS by integrating multiple AWS services to achieve scalability, reliability, and fault tolerance.
 
 ## Architecture Overview
 User traffic flows through the following components:
@@ -13,6 +14,15 @@ Route53 → Application Load Balancer → Auto Scaling EC2 Instances → RDS (My
 - Application Load Balancer – Distributes traffic
 - Amazon RDS (MySQL) – Managed database
 - Amazon Route53 – Domain and DNS management
+
+ | Service | Purpose |
+|-------|--------|
+| EC2 | Hosts WordPress application |
+| Auto Scaling | Maintains availability |
+| ALB | Distributes incoming traffic |
+| RDS (MySQL) | Centralized database |
+| Route53 | Domain and DNS routing |
+
 
 ## How the System Works
 1. Users access the website using a custom domain.
@@ -53,6 +63,12 @@ This deployment follows least-privilege rules between AWS components:
 
 **Outbound**
 - Default (or restricted as per AWS defaults)
+  
+## Failure Scenario Test
+To validate high availability, an EC2 instance was manually terminated.
+The Auto Scaling Group automatically launched a new instance, which was registered as healthy in the Application Load Balancer.
+The WordPress website remained accessible during the process.
+
 
 ## Outcome
 This setup ensures that the WordPress website remains available even if individual EC2 instances fail.
