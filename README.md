@@ -29,5 +29,9 @@ Route53 → Application Load Balancer → Auto Scaling EC2 Instances → RDS (My
 ## Proof of Deployment
 Screenshots showing the AWS configuration and working WordPress site are available in the Docs/Screenshots directory.
 
+## Automation
+EC2 instances use a User Data script to automatically install and configure WordPress during launch.
+
+
 ## Outcome
 This setup ensures that the WordPress website remains available even if individual EC2 instances fail.
