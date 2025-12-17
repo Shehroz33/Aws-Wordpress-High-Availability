@@ -26,5 +26,33 @@ Route53 → Application Load Balancer → Auto Scaling EC2 Instances → RDS (My
 - Health checks via Application Load Balancer
 - Automatic instance replacement using Auto Scaling
 
+
+## Security Groups (Traffic Rules)
+
+This deployment follows least-privilege rules between AWS components:
+
+### 1: ALB Security Group (Public)
+**Inbound**
+- HTTP (80) from `0.0.0.0/0`
+- HTTPS (443) from `0.0.0.0/0` (if using SSL)
+
+**Outbound**
+- HTTP (80) to EC2 Security Group
+
+### 2: EC2 Security Group (Private App Tier)
+**Inbound**
+- HTTP (80) from ALB Security Group only
+- SSH (22) from My IP only (optional for admin)
+
+**Outbound**
+- MySQL (3306) to RDS Security Group
+
+### 3: RDS Security Group (Database Tier)
+**Inbound**
+- MySQL (3306) from EC2 Security Group only
+
+**Outbound**
+- Default (or restricted as per AWS defaults)
+
 ## Outcome
 This setup ensures that the WordPress website remains available even if individual EC2 instances fail.
