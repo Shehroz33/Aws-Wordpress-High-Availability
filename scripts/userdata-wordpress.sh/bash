@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+dnf update -y
+dnf install -y httpd php php-mysqlnd wget tar
+
+systemctl enable httpd
+systemctl start httpd
+
+# ALB health check (recommended)
+echo "OK" > /var/www/html/health.html
+
+cd /tmp
+wget -q https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+
+# Serve WordPress on /
+rm -rf /var/www/html/*
+cp -r wordpress/* /var/www/html/
+
+chown -R apache:apache /var/www/html
+chmod -R 755 /var/www/html
+
+systemctl restart httpd
