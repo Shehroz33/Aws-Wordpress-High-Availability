@@ -26,5 +26,8 @@ Route53 → Application Load Balancer → Auto Scaling EC2 Instances → RDS (My
 - Health checks via Application Load Balancer
 - Automatic instance replacement using Auto Scaling
 
+## Proof of Deployment
+Screenshots showing the AWS configuration and working WordPress site are available in the Docs/Screenshots directory.
+
 ## Outcome
 This setup ensures that the WordPress website remains available even if individual EC2 instances fail.
