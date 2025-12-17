@@ -1,7 +1,7 @@
 # AWS WordPress High Availability on AWS
 
 
-This project demonstrates a highly available WordPress deployment on AWS by integrating multiple AWS services to achieve scalability, reliability, and fault tolerance.
+This project demonstratess a highly available WordPress deployment on AWS by integrating multiple AWS services to achieve scalability, reliability, and fault tolerance.
 
 ## Architecture Overview
 User traffic flows through the following components:
